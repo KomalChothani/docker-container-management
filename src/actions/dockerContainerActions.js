@@ -13,7 +13,31 @@ const findContainerBySearchText = (searchText) => {
     }
 }
 
+const updateTheContainerStatus = (containerId, containerStatus) => {
+    return {
+        type: ActionTypes.UPDATE_THE_CONTAINER_STATUS,
+        payload: { containerId, containerStatus }
+    }
+}
+
+const cancelTheSearchMode = () => {
+    return {
+        type: ActionTypes.CANCEL_THE_SEARCH_MODE,
+    }
+}
+
+const deleteTheContainer = (containerId) => {
+    return {
+        type: ActionTypes.DELETE_THE_CONTAINER,
+        payload: containerId,
+    }
+}
+ 
+
 export {
     fetchAllDockerContainerData,
-    findContainerBySearchText
+    findContainerBySearchText,
+    updateTheContainerStatus,
+    cancelTheSearchMode,
+    deleteTheContainer,
 }

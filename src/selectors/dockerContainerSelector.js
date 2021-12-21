@@ -14,6 +14,10 @@ const getPausedContainer = (state) => {
     return state.dockerContainerData.filter((data) => data.status === 'paused')
 }
 
+const getRestartedContainer = (state) => {
+    return state.dockerContainerData.filter((data) => data.status === 'restarted')
+}
+
 const getStoppedContainer = (state) => {
     return state.dockerContainerData.filter((data) => data.status === 'stopped')
 }
@@ -31,6 +35,7 @@ export {
     getStartedContainer,
     getRunningContainer,
     getPausedContainer,
+    getRestartedContainer,
     getStoppedContainer,
     getDeadContainer,
     findContainerBySearchText,

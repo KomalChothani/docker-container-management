@@ -46,7 +46,7 @@
 }
 
 .searchbox button {
-    margin-left: -57px;
+    margin-left: -34px;
     background: lightgrey !important;
     height: 40px;
     background: fixed;
@@ -56,6 +56,10 @@
     border-right: none;
 }
 
+.searchbox button i {
+    width: 20px;
+}
+
 .searchbox button:hover {
     background: darkgray !important;
     cursor: pointer;
@@ -63,4 +67,9 @@
 
 .searchbox button.disabled {
     pointer-events: none;
+}
+
+.removeBtn {
+    margin-left: -58px;
+    margin-top: 8px;
 }

@@ -2,7 +2,12 @@ import React from "react";
 
 class CardContainer extends React.Component {
   render() {
-    const { containerId, image, name } = this.props.containerData;
+    const {
+      containerData: { containerId, image, name },
+      firstBtn,
+      secondBtn,
+    } = this.props;
+
     const cardData = [
       { name: "Docker Id", value: containerId },
       { name: "Name", value: name },
@@ -17,6 +22,13 @@ class CardContainer extends React.Component {
             <span>{data.value}</span>
           </div>
         ))}
+
+        {firstBtn && (
+          <button onClick={() => firstBtn.callBack(containerId)}>{firstBtn.name}</button>
+        )}
+        {secondBtn && (
+          <button onClick={() => secondBtn.callBack(containerId)}>{secondBtn.name}</button>
+        )}
       </div>
     );
   }

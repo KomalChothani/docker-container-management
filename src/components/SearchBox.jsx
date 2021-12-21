@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { findContainerBySearchText } from '../actions/dockerContainerActions';
+import {
+  findContainerBySearchText,
+  cancelTheSearchMode,
+} from "../actions/dockerContainerActions";
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -13,6 +16,7 @@ class SearchBox extends React.Component {
 
     this.onSearch = this.onSearch.bind(this);
     this.onSearchButtonClick = this.onSearchButtonClick.bind(this);
+    this.onCancelButtonClick = this.onCancelButtonClick.bind(this);
   }
 
   onSearch(e) {
@@ -25,6 +29,13 @@ class SearchBox extends React.Component {
     this.props.findContainerBySearchText(this.state.searchText);
   }
 
+  onCancelButtonClick() {
+    this.props.cancelTheSearchMode();
+    this.setState({
+      searchText: "",
+    });
+  }
+
   render() {
     return (
       <div className="searchbox">
@@ -32,14 +43,22 @@ class SearchBox extends React.Component {
           placeholder="Search by name, container id or image"
           value={this.state.searchText}
           onChange={this.onSearch}
+          onKeyDown={(e) => e.keyCode === 13 && this.onSearchButtonClick()}
         />
         <button
           type="button"
           onClick={this.onSearchButtonClick}
-          className={!this.state.searchText ? "disabled" : ''}
+          className={!this.state.searchText ? "disabled" : ""}
         >
-          Search
+          <i className="fa fa-search"></i>
         </button>
+
+        <span
+          onClick={this.onCancelButtonClick}
+          className="removeBtn"
+        >
+          <i class="fa fa-remove"></i>
+        </span>
       </div>
     );
   }
@@ -49,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       findContainerBySearchText,
+      cancelTheSearchMode,
     },
     dispatch
   );
