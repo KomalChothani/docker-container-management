@@ -1,0 +1,66 @@
+.main-container {
+    margin: 10px 20px;
+}
+
+.container-status {
+    font-weight: bold;
+    max-width: 225px;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.container-data {
+    display: flex;
+}
+
+.container-data > div:not(:first-child) {
+    margin-left: 10px;
+}
+
+.no-data-message {
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    min-width: 225px;
+    color: gray;
+    font-weight: 400;
+}
+
+.searchbox {
+    display: flex;
+    justify-content: center;
+}
+
+.searchbox input {
+    padding: 10px;
+    width: 500px;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+}
+
+
+.searchbox input:hover,
+.searchbox input:focus-visible{
+    border: 1px solid darkgray;
+    outline: none;
+}
+
+.searchbox button {
+    margin-left: -57px;
+    background: lightgrey !important;
+    height: 40px;
+    background: fixed;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-bottom: none;
+    border-right: none;
+}
+
+.searchbox button:hover {
+    background: darkgray !important;
+    cursor: pointer;
+}
+
+.searchbox button.disabled {
+    pointer-events: none;
+}
