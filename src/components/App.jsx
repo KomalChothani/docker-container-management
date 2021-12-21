@@ -1,14 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  fetchAllDockerContainerData,
-  updateTheContainerStatus,
-  deleteTheContainer,
-} from "../actions/dockerContainerActions";
+import * as DockerContainerActions from "../actions/dockerContainerActions";
 import SearchBox from "./SearchBox";
 import * as Selector from "../selectors/dockerContainerSelector";
 import CardContainer from "./CardContainer";
+import * as DockerStatusConstants from "../constants/dockerContainerStatus";
+import i18n from "../i18n";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,18 +24,34 @@ class App extends React.Component {
     this.props.fetchAllDockerContainerData();
   }
 
+  /**
+   * This method used to  restart the running container
+   * @param {string} containerId 
+   */
   restartTheRunningContainer(containerId) {
-    this.props.updateTheContainerStatus(containerId, "restarted");
+    this.props.updateTheContainerStatus(containerId, DockerStatusConstants.RESTARTED);
   }
 
+   /**
+   * This method used to stop the running container
+   * @param {string} containerId 
+   */
   stopTheRunningContainer(containerId) {
-    this.props.updateTheContainerStatus(containerId, "stopped");
+    this.props.updateTheContainerStatus(containerId, DockerStatusConstants.STOPPED);
   }
 
+   /**
+   * This method used to start the stop container
+   * @param {string} containerId 
+   */
   startTheStoppedContainer(containerId) {
-    this.props.updateTheContainerStatus(containerId, "started");
+    this.props.updateTheContainerStatus(containerId, DockerStatusConstants.STARTED);
   }
 
+   /**
+   * This method used to permanently delete the stop container
+   * @param {string} containerId 
+   */
   deleteTheStoppedContainer(containerId) {
     this.props.deleteTheContainer(containerId);
   }
@@ -55,19 +69,19 @@ class App extends React.Component {
 
     const allContainersInfo = [
       {
-        title: "Created Container",
+        title: i18n.t("message.Created_Container"),
         containerData: createdContainer,
-        emptyMessage: "Currently no container is created",
+        emptyMessage: i18n.t("errMessage.No_Container_Created"),
       },
       {
-        title: "Started Container",
+        title: i18n.t("message.Started_Container"),
         containerData: startedContainer,
-        emptyMessage: "Currently no container is started",
+        emptyMessage:i18n.t("errMessage.No_Container_Started"),
       },
       {
-        title: "Running Container",
+        title: i18n.t("message.Running_Container"),
         containerData: runningContainer,
-        emptyMessage: "Currently no container is in running state",
+        emptyMessage: i18n.t("errMessage.No_Container_Running"),
         firstBtn: {
           name: "restart",
           callBack: this.restartTheRunningContainer,
@@ -75,26 +89,26 @@ class App extends React.Component {
         secondBtn: { name: "Stop", callBack: this.stopTheRunningContainer },
       },
       {
-        title: "Paused Container",
+        title: i18n.t("message.Paused_Container"),
         containerData: pausedContainer,
-        emptyMessage: "Currently no container is in paused state",
+        emptyMessage: i18n.t("errMessage.No_Container_Paused"),
       },
       {
-        title: "Restarted Container",
+        title: i18n.t("message.Restarted_Container"),
         containerData: restartContainer,
-        emptyMessage: "Currently no container is restarted",
+        emptyMessage: i18n.t("errMessage.No_Container_Restarted"),
       },
       {
-        title: "Stopped/Exited Container",
+        title: i18n.t("message.Stopped_OR_Exited_Container"),
         containerData: stoppedContainer,
-        emptyMessage: "Currently no container is stopped",
+        emptyMessage: i18n.t("errMessage.No_Container_Stopped_OR_Exited"),
         firstBtn: { name: "Start", callBack: this.startTheStoppedContainer },
         secondBtn: { name: "Delete", callBack: this.deleteTheStoppedContainer },
       },
       {
-        title: "Dead Container",
+        title: i18n.t("message.Dead_Container"),
         containerData: deadContainer,
-        emptyMessage: "Currently no container is dead",
+        emptyMessage: i18n.t("errMessage.NO_Container_Dead"),
       },
     ];
 
@@ -143,9 +157,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      fetchAllDockerContainerData,
-      updateTheContainerStatus,
-      deleteTheContainer,
+      fetchAllDockerContainerData: DockerContainerActions.fetchAllDockerContainerData,
+      updateTheContainerStatus: DockerContainerActions.updateTheContainerStatus,
+      deleteTheContainer: DockerContainerActions.deleteTheContainer,
     },
     dispatch
   );
