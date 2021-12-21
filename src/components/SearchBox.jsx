@@ -1,10 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  findContainerBySearchText,
-  cancelTheSearchMode,
-} from "../actions/dockerContainerActions";
+import * as DockerActions from "../actions/dockerContainerActions";
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -45,6 +42,7 @@ class SearchBox extends React.Component {
           onChange={this.onSearch}
           onKeyDown={(e) => e.keyCode === 13 && this.onSearchButtonClick()}
         />
+
         <button
           type="button"
           onClick={this.onSearchButtonClick}
@@ -67,8 +65,8 @@ class SearchBox extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      findContainerBySearchText,
-      cancelTheSearchMode,
+      findContainerBySearchText: DockerActions.findContainerBySearchText,
+      cancelTheSearchMode: DockerActions.cancelTheSearchMode,
     },
     dispatch
   );

@@ -1,29 +1,35 @@
+import * as DockerStatusConstants from "../constants/dockerContainerStatus";
+
+const filterDataContainerBasedOnStatus = (containerData, containerStatus) => {
+    return containerData.filter((data) => data.status === containerStatus);
+} 
+
 const getCreatedContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'created')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.CREATED)
 }
 
 const getStartedContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'started')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.STARTED)
 }
 
 const getRunningContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'running')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.RUNNING)
 }
 
 const getPausedContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'paused')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.PAUSED)
 }
 
 const getRestartedContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'restarted')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.RESTARTED)
 }
 
 const getStoppedContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'stopped')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.STOPPED)
 }
 
 const getDeadContainer = (state) => {
-    return state.dockerContainerData.filter((data) => data.status === 'dead')
+    return filterDataContainerBasedOnStatus(state.dockerContainerData, DockerStatusConstants.DEAD)
 }
 
 const findContainerBySearchText = (searchText, dockerContainerData) => {
